@@ -16,10 +16,28 @@
 
     <title>Name that Meme</title>
 </head>
-  
-<body>
-    
 
+<body>
+    <nav class="nav nav-pills nav-fill">
+        <a class="nav-item nav-link active" href="#" onclick="viewHighScore()">High Scores</a>
+        <a class="nav-item nav-link active" href="#" id="back-to-start-link" onclick="goBackToQuiz()" style="display: none;">Go Back to Quiz</a>        
+    </nav>
+    <div class="progress" style="height: 20px;">
+        <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="100" aria-valuemin="0"
+            aria-valuemax="100"></div>
+    </div>
+    <main>
+        <div class="card text-center border-primary w-75 mx-auto" style="margin-top: 5%;">
+            <img class="card-img-top" src="..." alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                    content.</p>
+                <a href="#" class="btn btn-outline-primary">Start Quiz</a>
+            </div>
+        </div>
+
+    </main>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
