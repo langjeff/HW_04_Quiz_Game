@@ -57,9 +57,7 @@ var paragraphEl = document.querySelector(".card-text");
 var choicesEl = document.querySelector("#choicesMenu");
 var formEl = document.querySelector("#userData");
 var scoreEl = document.querySelector("#scores");
-var progressEl = document.querySelector(".progress-bar");
-var userInput = document.querySelector("userInitials")
-var storeButton = document.getElementById("#storeScore");
+var progressEl = document.querySelector(".progress-bar")
 // VARIABLES FOR QUIZ
 
 var questionNumber = 0;
@@ -104,7 +102,7 @@ function createChoices() {
 }
 
  // EVENT LISTENER FOR USER SELECTION
-        document.addEventListener("click", function(event) {
+document.addEventListener("click", function(event) {
         // conditional to evaluate element id click
         if (event.target.matches("#choice")) {
         // set variable for userChoice to be compared to question answer    
@@ -115,10 +113,17 @@ function createChoices() {
             quizTime += 5;
             //increment question number and see if any questions remain            
             questionNumber ++;
-            choicesEl.innerHTML = "";
-            getQuestions();
-            correct();
-        // if answer is wrong do the following.   
+            // conditional for end of questions
+            if (questionNumber <= (questions.length - 1)) {
+                choicesEl.innerHTML = "";
+                getQuestions();
+                correct();
+            } else {
+                choicesEl.innerHTML = "";
+                correct();
+                //code to display finalScore & form to save
+            }
+            
         } 
         else {
             //decrease time by 10 seconds
@@ -126,10 +131,19 @@ function createChoices() {
             //increment question number and see if any questions remain            
             questionNumber ++;
             // conditional for end of questions
-            choicesEl.innerHTML = "";
-            getQuestions();
-            incorrect();
+            if (questionNumber <= (questions.length - 1)) {
+                choicesEl.innerHTML = "";
+                getQuestions();
+                incorrect();
+            } else {
+                choicesEl.innerHTML = "";
+                correct();
+                //code to display finalScore & form to save
+            }
+                
+
         } 
+        
     }
 })
 
@@ -177,7 +191,6 @@ function timer() {
     //parameters for quiz finish
     else if (questionNumber === (questions.length)) {
         clearInterval(timerClock);
-        imageEl.src = "./assets/success.jpg";
         choicesEl.innerHTML = " ";
         questionNumber = 0;
         questionEl.textContent = "Your score is " + quizTime + "!";
@@ -191,14 +204,11 @@ function timer() {
         imageEl.src = "./assets/success.jpg";
         // form element to record user initials & push high score to local storage
         formEl.setAttribute("style","width: 50%; margin: auto; display: block; margin-top: 5px;");
-        document.addEventListener("click", function(event) {
-        // conditional to evaluate element id click
-        if (event.target.matches("#storeScore")) {
-        
-        }
-        })
-        }
+
+    }
     }, 1000);
+
+    
 }
 
 //EVENT LISTENER FOR RESTART BUTTON
