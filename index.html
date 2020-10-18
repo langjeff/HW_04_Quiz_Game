@@ -18,27 +18,42 @@
 </head>
 
 <body>
+    <!-- navbar component for link to high scores -->
     <nav class="nav nav-pills nav-fill">
+        <!-- default navbar for index.html -->
         <a class="nav-item nav-link active" href="#" onclick="viewHighScore()">High Scores</a>
+        <!-- alternate nav item when on high scores page -->
         <a class="nav-item nav-link active" href="#" id="back-to-start-link" onclick="goBackToQuiz()" style="display: none;">Go Back to Quiz</a>        
     </nav>
+    <!-- progress bar to serve as visual for countdown timer -->
     <div class="progress" style="height: 20px;">
-        <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="100" aria-valuemin="0"
+        <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0"
             aria-valuemax="100"></div>
     </div>
+    <!-- Main div for card element to serve as container for questions -->
     <main>
-        <div class="card text-center border-primary w-75 mx-auto" style="margin-top: 5%;">
-            <img class="card-img-top" src="..." alt="Card image cap">
+        <div class="card text-center border-primary w-auto mx-auto" style="margin-top: 5%;">
+            <img class="card-img-top mx-auto" src="./assets/titleCard.png" alt="image" style="width: 600px; padding: 1em;">
             <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                    content.</p>
-                <a href="#" class="btn btn-outline-primary">Start Quiz</a>
+                <!-- will change to question once started -->
+                <h5 class="card-title">Welcome to Name that Meme!</h5>
+                <!-- will change style to display: none on start -->
+                <p class="card-text">Click on the button below to begin!</p>
+                <!-- will change style to display: none on start -->
+                <button id = "startButton" class="btn btn-outline-primary">Start Quiz</button>
+                <!-- div holder for choices -->
+                <div id = "choicesMenu">
+
+                </div>
+                <!-- div holder for scores -->
+                <div id = "scores">
+
+                </div>
             </div>
         </div>
 
     </main>
-    <!-- Optional JavaScript -->
+    <!-- Javascript for bootstrap plugins -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
