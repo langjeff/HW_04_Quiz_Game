@@ -18,22 +18,22 @@
 </head>
 
 <body>
+    <!-- progress bar to serve as visual for countdown timer -->
+    <div class="progress sticky-top" style="height: 20px;">
+        <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0"
+            aria-valuemax="100"></div>
+    </div>
     <!-- navbar component for link to high scores -->
-    <nav class="nav nav-pills nav-fill">
+    <nav class="nav nav-pills nav-fill" style="height: 5px;">
         <!-- default navbar for index.html -->
         <a class="nav-item nav-link active" href="#" onclick="highScores()">High Scores</a>
         <!-- alternate nav item when on high scores page -->
         <a class="nav-item nav-link active" href="#" id="back-to-start-link" onclick="backToQuiz()" style="display: none;">Go Back to Quiz</a>        
     </nav>
-    <!-- progress bar to serve as visual for countdown timer -->
-    <div class="progress" style="height: 20px;">
-        <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0"
-            aria-valuemax="100"></div>
-    </div>
     <!-- Main div for card element to serve as container for questions -->
     <main>
         <div class="card text-center border-primary w-auto mx-auto" style="margin-top: 5%;">
-            <img class="card-img-top mx-auto" src="./assets/titleCard.png" alt="image" style="width: 600px; padding: 1em;">
+            <img class="card-img-top mx-auto" src="./assets/titleCard.png" alt="image" style="max-height: 500px; max-width: 500px; padding: 1em;">
             <div class="card-body">
                 <!-- will change to question once started -->
                 <h5 class="card-title">Welcome to Name that Meme!</h5>

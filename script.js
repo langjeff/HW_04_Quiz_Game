@@ -64,7 +64,7 @@ var userScore = 0;
 var choicesArray = questions[questionNumber].choices;
 var finalScore;
 var highScores = [];
-var quizTime = 10;
+var quizTime = 100;
 
 // EVENT LISTENER AND FUNCTIONS FOR QUIZ QUESTIONS
 startEl.addEventListener("click", function () {
@@ -182,8 +182,19 @@ function timer() {
         restartButton.textContent = "Restart";
         choicesEl.appendChild(restartButton);         
     }
-    else if (questionNumber === (questionNumber.length +1)) {
-
+    else if (questionNumber === (questions.length)) {
+        clearInterval(timerClock);
+        choicesEl.innerHTML = " ";
+        questionNumber = 0;
+        questionEl.textContent = "Your score is " + quizTime + "!";
+        var restartButton = document.createElement("button");
+        restartButton.setAttribute("type","button");
+        restartButton.setAttribute("class","btn btn-outline-secondary btn-lg btn-block");
+        restartButton.setAttribute("style","width: 50%; margin: auto; padding: 1em");
+        restartButton.setAttribute("id","restart");
+        restartButton.textContent = "Restart";
+        choicesEl.appendChild(restartButton);
+        imageEl.src = "./assets/success.jpg";  
     }
     }, 1000);
 
