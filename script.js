@@ -49,12 +49,15 @@ var questions = [
 
 
 // VARIABLES FOR DOM
+var highScoreEl = document.querySelector("#highScores");
+var quizReturnEl = document.querySelector("#startLink");
 var cardEl = document.querySelector(".card-body");
 var imageEl = document.querySelector(".card-img-top")
 var questionEl = document.querySelector(".card-title");
 var startEl = document.querySelector("#startButton");
 var paragraphEl = document.querySelector(".card-text");
 var choicesEl = document.querySelector("#choicesMenu");
+var inputEl = document.querySelector("#userInitials");
 var formEl = document.querySelector("#userData");
 var scoreEl = document.querySelector("#scores");
 var progressEl = document.querySelector(".progress-bar")
@@ -90,13 +93,13 @@ function getQuestions() {
 
 // FUNCTION TO BE CALLED TO CREATE BUTTTONS FOR QUESTION CHOICES
 function createChoices() {
-        for (j=0; j < choicesArray.length; j++) {
+        for (i=0; i < choicesArray.length; i++) {
         var choiceButton = document.createElement("button");
         choiceButton.setAttribute("type","button");
         choiceButton.setAttribute("class","btn btn-outline-secondary btn-lg btn-block");
         choiceButton.setAttribute("style","width: 50%; margin: auto; padding: 1em");
         choiceButton.setAttribute("id","choice");
-        choiceButton.textContent = questions[questionNumber].choices[j];
+        choiceButton.textContent = questions[questionNumber].choices[i];
         choicesEl.appendChild(choiceButton);
         };
 }
@@ -204,7 +207,23 @@ function timer() {
         imageEl.src = "./assets/success.jpg";
         // form element to record user initials & push high score to local storage
         formEl.setAttribute("style","width: 50%; margin: auto; display: block; margin-top: 5px;");
-
+        formEl.addEventListener("submit", function(event) {
+        event.preventDefault();
+        var initialsText = inputEl.value.trim();
+        // Return from function early if submitted todoText is blank
+        if (initialsText === "") {
+            return;
+        }
+        // store object for userinitials and score
+        var userScore = {
+            initials: initialsText,
+            score: quizTime
+        }
+        highScoreStore.push(userScore);
+        inputEl.value = "";
+        var highScoreString = JSON.stringify(userScore);
+        window.localStorage.setItem("High Scores", highScoreString);
+        });
     }
     }, 1000);
 
@@ -220,9 +239,45 @@ function timer() {
 })
 
 //  FUNCTION TO RENDER HIGH SCORES
-
+    function renderHighScores() {
+    var savedHighScores = localStorage.getItem("High Scores");
+    if (savedHighScores === null) {
+    return;
+    }
+    var objectScores = JSON.parse(savedHighScores);
+    highScoreStore = objectScores;          
+}
 //  EVENT LISTENER AND FUNCTION TO DISPLAY HIGH SCORES
+    // document.addEventListener("click", function(event) {
+    // // conditional to evaluate element id click
+    // if (event.target.matches("#highScoreEl")) {
+    function viewHighScores() { 
+    renderHighScores();    
+    cardEl.innerHTML = " ";
+    highScoreEl.innerHTML = " ";
+    var scoreList = document.createElement("ul");
+    scoreList.setAttribute("class","list-group");
+    scoreList.setAttribute("style","width: 50%; margin: auto;");
+    highScoreEl.appendChild(scoreList);
+    for (var j=0; j < highScoreStore.length; j++) {
+        var scoreItem = document.createElement("li");
+        scoreItem.setAttribute("class","list-group-item list-group-item-success");
+        scoreItem.textContent = highScoreStore[j];
+        console.log(highScoreStore[j]);
+        scoreList.appendChild(scoreItem);
+    }    
+}
 
-// EVENT LISTENER FOR GO BACK TO QUIZ
 
-
+// var highScoreEl = document.querySelector("#highScores");
+// var quizReturnEl = document.querySelector("#startLink");
+// var cardEl = document.querySelector(".card-body");
+// var imageEl = document.querySelector(".card-img-top")
+// var questionEl = document.querySelector(".card-title");
+// var startEl = document.querySelector("#startButton");
+// var paragraphEl = document.querySelector(".card-text");
+// var choicesEl = document.querySelector("#choicesMenu");
+// var inputEl = document.querySelector("#userInitials");
+// var formEl = document.querySelector("#userData");
+// var scoreEl = document.querySelector("#scores");
+// var progressEl = document.querySelector(".progress-bar")
