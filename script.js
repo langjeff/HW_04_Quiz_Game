@@ -56,6 +56,7 @@ var startEl = document.querySelector("#startButton");
 var paragraphEl = document.querySelector(".card-text");
 var choicesEl = document.querySelector("#choicesMenu");
 var scoreEl = document.querySelector("#scores");
+var progressEl = document.querySelector(".progress-bar")
 // VARIABLES FOR QUIZ
 
 var questionNumber = 0;
@@ -63,7 +64,7 @@ var userScore = 0;
 var choicesArray = questions[questionNumber].choices;
 var finalScore;
 var highScores = [];
-var quizTime = 100;
+var quizTime = 10;
 
 // EVENT LISTENER AND FUNCTIONS FOR QUIZ QUESTIONS
 startEl.addEventListener("click", function () {
@@ -72,6 +73,7 @@ startEl.addEventListener("click", function () {
     //hide start button element
     startEl.style.display = "none";
     getQuestions();
+    timer();
 })
 
 function getQuestions() {
@@ -151,7 +153,7 @@ function correct () {
     correctChoice.textContent = "That's right. You gain 5 seconds!";
     choicesEl.appendChild(correctChoice);
 }
-
+// FUNCTION FOR INCORRECT CHOICE
 function incorrect () {
     var incorrectChoice = document.createElement("div");
     incorrectChoice.setAttribute("role","alert");
@@ -160,4 +162,38 @@ function incorrect () {
     incorrectChoice.textContent = "That's incorrect. You lose 10 seconds!";
     choicesEl.appendChild(incorrectChoice);
 }
+//FUNCTION FOR TIMER
+function timer() {
+    // sets up timer and passes value to progress bar element
+    var timerClock = setInterval(function() {
+        progressEl.style.width = (quizTime + "%");
+        quizTime --;
+        // conditional for end of time or end of game
+    if (quizTime <= 0) {
+        clearInterval(timerClock);
+        choicesEl.innerHTML = " ";
+        questionNumber = 0;
+        questionEl.textContent = "You ran out of time.";
+        var restartButton = document.createElement("button");
+        restartButton.setAttribute("type","button");
+        restartButton.setAttribute("class","btn btn-outline-secondary btn-lg btn-block");
+        restartButton.setAttribute("style","width: 50%; margin: auto; padding: 1em");
+        restartButton.setAttribute("id","restart");
+        restartButton.textContent = "Restart";
+        choicesEl.appendChild(restartButton);         
+    }
+    else if (questionNumber === (questionNumber.length +1)) {
 
+    }
+    }, 1000);
+
+    
+}
+
+//EVENT LISTENER FOR RESTART BUTTON
+    document.addEventListener("click", function(event) {
+    // conditional to evaluate element id click
+    if (event.target.matches("#restart")) {
+    location.reload();
+    }
+})
