@@ -64,11 +64,44 @@ var progressEl = document.querySelector(".progress-bar")
 // VARIABLES FOR QUIZ
 
 var questionNumber = 0;
-var userScore = 0;
 var choicesArray = questions[questionNumber].choices;
 var finalScore;
 var highScoreStore = [];
 var quizTime = 100;
+
+// pulls high scores from local storage
+renderHighScores();
+// FUNCTION TO RENDER HIGH SCORES
+function renderHighScores () {
+    var savedHighScores = localStorage.getItem("localScores");
+    if(savedHighScores === null) {
+        return;
+    }
+    var objectScores = JSON.parse(savedHighScores);
+    console.log("Saved High Scores: " + savedHighScores);
+    highScoreStore = objectScores;
+}
+
+//FUNCTION TO VIEW HIGH SCORES
+    function viewHighScores() { 
+    var highScoreList = window.localStorage.getItem("localScores");
+    console.log("high score list " + highScoreList);
+    var scoreObject = JSON.parse(highScoreList);
+    console.log("score object" + scoreObject);
+    cardEl.innerHTML = " ";
+    highScoreEl.innerHTML = " ";
+    var scoreList = document.createElement("ul");
+    scoreList.setAttribute("class","list-group");
+    scoreList.setAttribute("style","width: 50%; margin: auto;");
+    highScoreEl.appendChild(scoreList);
+    for (var j=0; j < highScoreStore.length -1; j++) {
+        var scoreItem = document.createElement("li");
+        scoreItem.setAttribute("class","list-group-item list-group-item-success");
+        scoreItem.textContent = scoreObject.initials[j] + "      " + scoreObject.score[j];
+        scoreList.appendChild(scoreItem);
+    }    
+}
+
 
 // EVENT LISTENER FOR START BUTTON
 startEl.addEventListener("click", function () {
@@ -219,15 +252,16 @@ function timer() {
             initials: initialsText,
             score: quizTime
         }
+        // pushes values from userScore to highScoreStore variable
         highScoreStore.push(userScore);
         inputEl.value = "";
+        // takes output from above and converts it to a string
         var highScoreString = JSON.stringify(userScore);
-        window.localStorage.setItem("High Scores", highScoreString);
+
+        window.localStorage.setItem("localScores", highScoreString);
         });
     }
     }, 1000);
-
-    
 }
 
 //EVENT LISTENER FOR RESTART BUTTON
@@ -238,46 +272,3 @@ function timer() {
     }
 })
 
-//  FUNCTION TO RENDER HIGH SCORES
-    function renderHighScores() {
-    var savedHighScores = localStorage.getItem("High Scores");
-    if (savedHighScores === null) {
-    return;
-    }
-    var objectScores = JSON.parse(savedHighScores);
-    highScoreStore = objectScores;          
-}
-//  EVENT LISTENER AND FUNCTION TO DISPLAY HIGH SCORES
-    // document.addEventListener("click", function(event) {
-    // // conditional to evaluate element id click
-    // if (event.target.matches("#highScoreEl")) {
-    function viewHighScores() { 
-    renderHighScores();    
-    cardEl.innerHTML = " ";
-    highScoreEl.innerHTML = " ";
-    var scoreList = document.createElement("ul");
-    scoreList.setAttribute("class","list-group");
-    scoreList.setAttribute("style","width: 50%; margin: auto;");
-    highScoreEl.appendChild(scoreList);
-    for (var j=0; j < highScoreStore.length; j++) {
-        var scoreItem = document.createElement("li");
-        scoreItem.setAttribute("class","list-group-item list-group-item-success");
-        scoreItem.textContent = highScoreStore[j];
-        console.log(highScoreStore[j]);
-        scoreList.appendChild(scoreItem);
-    }    
-}
-
-
-// var highScoreEl = document.querySelector("#highScores");
-// var quizReturnEl = document.querySelector("#startLink");
-// var cardEl = document.querySelector(".card-body");
-// var imageEl = document.querySelector(".card-img-top")
-// var questionEl = document.querySelector(".card-title");
-// var startEl = document.querySelector("#startButton");
-// var paragraphEl = document.querySelector(".card-text");
-// var choicesEl = document.querySelector("#choicesMenu");
-// var inputEl = document.querySelector("#userInitials");
-// var formEl = document.querySelector("#userData");
-// var scoreEl = document.querySelector("#scores");
-// var progressEl = document.querySelector(".progress-bar")
