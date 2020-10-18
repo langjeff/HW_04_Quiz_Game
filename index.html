@@ -26,9 +26,9 @@
     <!-- navbar component for link to high scores -->
     <nav class="nav nav-pills nav-fill" style="height: 5px;">
         <!-- default navbar for index.html -->
-        <a class="nav-item nav-link active" href="#" onclick="highScores()">High Scores</a>
+        <a class="nav-item nav-link active" href="#" id="highScores">High Scores</a>
         <!-- alternate nav item when on high scores page -->
-        <a class="nav-item nav-link active" href="#" id="back-to-start-link" onclick="backToQuiz()" style="display: none;">Go Back to Quiz</a>        
+        <a class="nav-item nav-link active" href="#" id="startLink" style="display: none;">Go Back to Quiz</a>        
     </nav>
     <!-- Main div for card element to serve as container for questions -->
     <main>
@@ -45,10 +45,19 @@
                 <div id = "choicesMenu">
 
                 </div>
-                <!-- div holder for scores -->
-                <div id = "scores">
+                <!-- form element for storing user initials -->
+                <form id="userData" style="width: 50%; margin: auto; display: none;">
+                    <div class="form-group">
+                        <label for="userInitials">Initials</label>
+                        <input type="initials" class="form-control" id="userInitials" aria-describedby="userInitials"
+                            placeholder="Enter initials">                        
+                    </div>
+                    <button id="storeScore" type="submit" class="btn btn-primary">Save Score</button>
+                </form>
+            </div>
+            <!-- div holder for scores -->
+            <div id = "scores">
 
-                </div>
             </div>
         </div>
 

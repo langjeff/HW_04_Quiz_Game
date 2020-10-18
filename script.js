@@ -55,15 +55,18 @@ var questionEl = document.querySelector(".card-title");
 var startEl = document.querySelector("#startButton");
 var paragraphEl = document.querySelector(".card-text");
 var choicesEl = document.querySelector("#choicesMenu");
+var formEl = document.querySelector("#userData");
 var scoreEl = document.querySelector("#scores");
-var progressEl = document.querySelector(".progress-bar")
+var progressEl = document.querySelector(".progress-bar");
+var userInput = document.querySelector("userInitials")
+var storeButton = document.getElementById("#storeScore");
 // VARIABLES FOR QUIZ
 
 var questionNumber = 0;
 var userScore = 0;
 var choicesArray = questions[questionNumber].choices;
 var finalScore;
-var highScores = [];
+var highScoreStore = [];
 var quizTime = 100;
 
 // EVENT LISTENER FOR START BUTTON
@@ -174,6 +177,7 @@ function timer() {
     //parameters for quiz finish
     else if (questionNumber === (questions.length)) {
         clearInterval(timerClock);
+        imageEl.src = "./assets/success.jpg";
         choicesEl.innerHTML = " ";
         questionNumber = 0;
         questionEl.textContent = "Your score is " + quizTime + "!";
@@ -184,11 +188,17 @@ function timer() {
         restartButton.setAttribute("id","restart");
         restartButton.textContent = "Restart";
         choicesEl.appendChild(restartButton);
-        imageEl.src = "./assets/success.jpg";  
-    }
+        imageEl.src = "./assets/success.jpg";
+        // form element to record user initials & push high score to local storage
+        formEl.setAttribute("style","width: 50%; margin: auto; display: block; margin-top: 5px;");
+        document.addEventListener("click", function(event) {
+        // conditional to evaluate element id click
+        if (event.target.matches("#storeScore")) {
+        
+        }
+        })
+        }
     }, 1000);
-
-    
 }
 
 //EVENT LISTENER FOR RESTART BUTTON
@@ -198,3 +208,11 @@ function timer() {
     location.reload();
     }
 })
+
+//  FUNCTION TO RENDER HIGH SCORES
+
+//  EVENT LISTENER AND FUNCTION TO DISPLAY HIGH SCORES
+
+// EVENT LISTENER FOR GO BACK TO QUIZ
+
+
