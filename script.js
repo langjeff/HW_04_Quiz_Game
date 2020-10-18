@@ -66,7 +66,7 @@ var finalScore;
 var highScores = [];
 var quizTime = 100;
 
-// EVENT LISTENER AND FUNCTIONS FOR QUIZ QUESTIONS
+// EVENT LISTENER FOR START BUTTON
 startEl.addEventListener("click", function () {
     //hide p element
     paragraphEl.style.display = "none";
@@ -76,6 +76,7 @@ startEl.addEventListener("click", function () {
     timer();
 })
 
+// FUNCTION TO BE CALLED TO GET QUESTIONS FOR DISPLAY
 function getQuestions() {
         //clears alert
         // changes image src attribute
@@ -86,6 +87,7 @@ function getQuestions() {
         createChoices();
 };
 
+// FUNCTION TO BE CALLED TO CREATE BUTTTONS FOR QUESTION CHOICES
 function createChoices() {
         for (j=0; j < choicesArray.length; j++) {
         var choiceButton = document.createElement("button");
@@ -110,17 +112,10 @@ function createChoices() {
             quizTime += 5;
             //increment question number and see if any questions remain            
             questionNumber ++;
-            // conditional for end of questions
-            if (questionNumber <= (questions.length - 1)) {
-                choicesEl.innerHTML = "";
-                getQuestions();
-                correct();
-            } else {
-                choicesEl.innerHTML = "";
-                correct();
-                //code to display finalScore & form to save
-            }
-            
+            choicesEl.innerHTML = "";
+            getQuestions();
+            correct();
+        // if answer is wrong do the following.   
         } 
         else {
             //decrease time by 10 seconds
@@ -128,23 +123,14 @@ function createChoices() {
             //increment question number and see if any questions remain            
             questionNumber ++;
             // conditional for end of questions
-            if (questionNumber <= (questions.length - 1)) {
-                choicesEl.innerHTML = "";
-                getQuestions();
-                incorrect();
-            } else {
-                choicesEl.innerHTML = "";
-                correct();
-                //code to display finalScore & form to save
-            }
-                
-
+            choicesEl.innerHTML = "";
+            getQuestions();
+            incorrect();
         } 
-        
     }
 })
 
-// FUNCTION FOR CORRECT CHOICE
+// FUNCTION TO BE CALLED FOR CORRECT CHOICE
 function correct () {
     var correctChoice = document.createElement("div");
     correctChoice.setAttribute("role","alert");
@@ -153,7 +139,7 @@ function correct () {
     correctChoice.textContent = "That's right. You gain 5 seconds!";
     choicesEl.appendChild(correctChoice);
 }
-// FUNCTION FOR INCORRECT CHOICE
+// FUNCTION TO BE CALLED FOR INCORRECT CHOICE
 function incorrect () {
     var incorrectChoice = document.createElement("div");
     incorrectChoice.setAttribute("role","alert");
@@ -169,9 +155,11 @@ function timer() {
         progressEl.style.width = (quizTime + "%");
         quizTime --;
         // conditional for end of time or end of game
+    //parameters for time expiration
     if (quizTime <= 0) {
         clearInterval(timerClock);
         choicesEl.innerHTML = " ";
+        progressEl.style.width = (quizTime + "%");
         questionNumber = 0;
         questionEl.textContent = "You ran out of time.";
         var restartButton = document.createElement("button");
@@ -180,8 +168,10 @@ function timer() {
         restartButton.setAttribute("style","width: 50%; margin: auto; padding: 1em");
         restartButton.setAttribute("id","restart");
         restartButton.textContent = "Restart";
-        choicesEl.appendChild(restartButton);         
+        choicesEl.appendChild(restartButton);
+        imageEl.src = "./assets/fail.jpg";
     }
+    //parameters for quiz finish
     else if (questionNumber === (questions.length)) {
         clearInterval(timerClock);
         choicesEl.innerHTML = " ";
