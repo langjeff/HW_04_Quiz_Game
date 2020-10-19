@@ -5,46 +5,46 @@ var questions = [
     answer: "Distracted Boyfriend",
     meme: "./assets/distracted.jpg"    
     },
-    {question: "What is my name?",
-    choices: ["Dog", "Shiba", "Doge", "Cat"],
-    answer: "Doge",
-    meme: "./assets/doge.png"    
-    },
-    {question: "Where did this meme come from?",
-    choices: ["Futurama", "Rick & Morty", "American Dad", "Family Guy"],
-    answer: "Family Guy",
-    meme: "./assets/farm.jpg"    
-    },
-    {question: "Greg is a...",
-    choices: ["Good Guy", "Bad Guy", "Stoned Guy", "Philosoraptor"],
-    answer: "Good Guy",
-    meme: "./assets/greg.jpg"    
-    },
-    {question: "My nickname is:",
-    choices: ["Mike", "Jump", "Air", "King"],
-    answer: "Air",
-    meme: "./assets/jordan.jpg"    
-    },
-    {question: "Where is he walking into?",
-    choices: ["DisneyLand", "Sauron", "Winterfell", "Mordor"],
-    answer: "Mordor",
-    meme: "./assets/mordor.jpg"    
-    },
-    {question: "What team do I play for?",
-    choices: ["Brooklyn Nets", "Golden State Warriors", "Toronto Raptors", "Cleveland Caviliers"],
-    answer: "Brooklyn Nets",
-    meme: "./assets/mvp.jpg"    
-    },
-    {question: "I am a:",
-    choices: ["Diknowitall", "Jurassiphiser", "Sageasauras", "Philosoraptor"],
-    answer: "Philosoraptor",
-    meme: "./assets/raptor.jpg"    
-    },
-    {question: "Come with me, and you see, a world of...",
-    choices: ["Much Procastination", "Pure Imagination", "Sad Lamentation", "Infinite Experimentation"],
-    answer: "Pure Imagination",
-    meme: "./assets/willy.jpg"    
-    },
+    // {question: "What is my name?",
+    // choices: ["Dog", "Shiba", "Doge", "Cat"],
+    // answer: "Doge",
+    // meme: "./assets/doge.png"    
+    // },
+    // {question: "Where did this meme come from?",
+    // choices: ["Futurama", "Rick & Morty", "American Dad", "Family Guy"],
+    // answer: "Family Guy",
+    // meme: "./assets/farm.jpg"    
+    // },
+    // {question: "Greg is a...",
+    // choices: ["Good Guy", "Bad Guy", "Stoned Guy", "Philosoraptor"],
+    // answer: "Good Guy",
+    // meme: "./assets/greg.jpg"    
+    // },
+    // {question: "My nickname is:",
+    // choices: ["Mike", "Jump", "Air", "King"],
+    // answer: "Air",
+    // meme: "./assets/jordan.jpg"    
+    // },
+    // {question: "Where is he walking into?",
+    // choices: ["DisneyLand", "Sauron", "Winterfell", "Mordor"],
+    // answer: "Mordor",
+    // meme: "./assets/mordor.jpg"    
+    // },
+    // {question: "What team do I play for?",
+    // choices: ["Brooklyn Nets", "Golden State Warriors", "Toronto Raptors", "Cleveland Caviliers"],
+    // answer: "Brooklyn Nets",
+    // meme: "./assets/mvp.jpg"    
+    // },
+    // {question: "I am a:",
+    // choices: ["Diknowitall", "Jurassiphiser", "Sageasauras", "Philosoraptor"],
+    // answer: "Philosoraptor",
+    // meme: "./assets/raptor.jpg"    
+    // },
+    // {question: "Come with me, and you see, a world of...",
+    // choices: ["Much Procastination", "Pure Imagination", "Sad Lamentation", "Infinite Experimentation"],
+    // answer: "Pure Imagination",
+    // meme: "./assets/willy.jpg"    
+    // },
 ];
 
 
@@ -59,7 +59,7 @@ var choicesEl = document.querySelector("#choicesMenu");
 var inputEl = document.querySelector("#userInitials");
 var formEl = document.querySelector("#userData");
 var scoreEl = document.querySelector("#scores");
-var progressEl = document.querySelector(".progress-bar")
+var progressEl = document.querySelector(".progress-bar");
 // VARIABLES FOR QUIZ
 
 var questionNumber = 0;
