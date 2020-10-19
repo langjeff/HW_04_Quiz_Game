@@ -72,13 +72,10 @@ var quizTime = 100;
 renderHighScores();
 // FUNCTION TO RENDER HIGH SCORES from local storage and push them to highScoreStore each time code is run.
 function renderHighScores () {
-    var savedHighScores = window.localStorage.getItem("localScores");
-    if(savedHighScores === null) {
+    if(JSON.parse(localStorage.getItem("localScores")) === null) {
         return;
     }
-    highScoreStore = JSON.parse(savedHighScores);
-    // console.log("Saved High Scores: " + savedHighScores);
-    // highScoreStore = objectScores;
+    highScoreStore = JSON.parse(localStorage.getItem("localScores"));
 }
 
 //FUNCTION TO VIEW HIGH SCORES
@@ -91,14 +88,16 @@ function renderHighScores () {
     cardEl.innerHTML = " ";
     imageEl.innerHTML = " ";
     var scoreList = document.createElement("ul");
+    scoreList.setAttribute("id","scoreList");
     scoreList.setAttribute("class","list-group");
     scoreList.setAttribute("style","width: 50%; margin: auto;");
     scoreEl.appendChild(scoreList);
+    var scoreListEl = document.querySelector("#scoreList"); 
     for (var j=0; j < highScoreStore.length; j++) {
         var scoreItem = document.createElement("li");
         scoreItem.setAttribute("class","list-group-item list-group-item-success");
         scoreItem.textContent = (highScoreStore.initials[j] + "      " + highScoreStore.score[j]);
-        scoreList.appendChild(scoreItem);
+        scoreListEl.appendChild(scoreItem);
         console.log(highScoreStore.initials[j] + "      " + highScoreStore.score[j]);
     }    
 }
@@ -246,18 +245,23 @@ function timer() {
         if (initialsText === "") {
             return;
         }
+        console.log(initialsText);
         // store object for userinitials and score
         var userScore = {
             initials: initialsText,
             score: quizTime
         }
         // pushes values from userScore to highScoreStore variable
-        highScoreStore.push(userScore);
-        
-        // takes output from above and converts it to a string
-        var highScoreString = JSON.stringify(highScoreStore);
-        // stores additional userScore as local storage
-        window.localStorage.setItem("localScores", highScoreString);
+        var localScores = localStorage.getItem("localScores"); 
+        if (localScores === null) {
+            localScores = [];
+        } 
+        else {
+        localScores = JSON.parse(localScores);
+        }
+        localScores.push(userScore);
+        var storeScores = JSON.stringify(localScores);
+        localStorage.setItem("localScores", storeScores);
         inputEl.value = "";
         });
     }
