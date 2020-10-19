@@ -49,7 +49,6 @@ var questions = [
 
 
 // VARIABLES FOR DOM
-var highScoreEl = document.querySelector("#highScores");
 var quizReturnEl = document.querySelector("#startLink");
 var cardEl = document.querySelector(".card-body");
 var imageEl = document.querySelector(".card-img-top")
@@ -69,36 +68,38 @@ var finalScore;
 var highScoreStore = [];
 var quizTime = 100;
 
-// pulls high scores from local storage
+// pulls high scores from local storage and inserts into to highScoreStore
 renderHighScores();
-// FUNCTION TO RENDER HIGH SCORES
+// FUNCTION TO RENDER HIGH SCORES from local storage and push them to highScoreStore each time code is run.
 function renderHighScores () {
-    var savedHighScores = localStorage.getItem("localScores");
+    var savedHighScores = window.localStorage.getItem("localScores");
     if(savedHighScores === null) {
         return;
     }
-    var objectScores = JSON.parse(savedHighScores);
-    console.log("Saved High Scores: " + savedHighScores);
-    highScoreStore = objectScores;
+    highScoreStore = JSON.parse(savedHighScores);
+    // console.log("Saved High Scores: " + savedHighScores);
+    // highScoreStore = objectScores;
 }
 
 //FUNCTION TO VIEW HIGH SCORES
     function viewHighScores() { 
-    var highScoreList = window.localStorage.getItem("localScores");
-    console.log("high score list " + highScoreList);
-    var scoreObject = JSON.parse(highScoreList);
-    console.log("score object" + scoreObject);
+    renderHighScores();    
+    // var highScoreList = localStorage.getItem("localScores");
+    // console.log("high score list " + highScoreList);
+    // var scoreObject = JSON.parse(highScoreList);
+    // console.log("score object" + scoreObject);
     cardEl.innerHTML = " ";
-    highScoreEl.innerHTML = " ";
+    imageEl.innerHTML = " ";
     var scoreList = document.createElement("ul");
     scoreList.setAttribute("class","list-group");
     scoreList.setAttribute("style","width: 50%; margin: auto;");
-    highScoreEl.appendChild(scoreList);
-    for (var j=0; j < highScoreStore.length -1; j++) {
+    scoreEl.appendChild(scoreList);
+    for (var j=0; j < highScoreStore.length; j++) {
         var scoreItem = document.createElement("li");
         scoreItem.setAttribute("class","list-group-item list-group-item-success");
-        scoreItem.textContent = scoreObject.initials[j] + "      " + scoreObject.score[j];
+        scoreItem.textContent = (highScoreStore.initials[j] + "      " + highScoreStore.score[j]);
         scoreList.appendChild(scoreItem);
+        console.log(highScoreStore.initials[j] + "      " + highScoreStore.score[j]);
     }    
 }
 
@@ -157,7 +158,6 @@ document.addEventListener("click", function(event) {
             } else {
                 choicesEl.innerHTML = "";
                 correct();
-                //code to display finalScore & form to save
             }
             
         } 
@@ -174,7 +174,6 @@ document.addEventListener("click", function(event) {
             } else {
                 choicesEl.innerHTML = "";
                 correct();
-                //code to display finalScore & form to save
             }
                 
 
@@ -242,7 +241,7 @@ function timer() {
         formEl.setAttribute("style","width: 50%; margin: auto; display: block; margin-top: 5px;");
         formEl.addEventListener("submit", function(event) {
         event.preventDefault();
-        var initialsText = inputEl.value.trim();
+        var initialsText = inputEl.value;
         // Return from function early if submitted todoText is blank
         if (initialsText === "") {
             return;
@@ -254,11 +253,12 @@ function timer() {
         }
         // pushes values from userScore to highScoreStore variable
         highScoreStore.push(userScore);
-        inputEl.value = "";
+        
         // takes output from above and converts it to a string
-        var highScoreString = JSON.stringify(userScore);
-
+        var highScoreString = JSON.stringify(highScoreStore);
+        // stores additional userScore as local storage
         window.localStorage.setItem("localScores", highScoreString);
+        inputEl.value = "";
         });
     }
     }, 1000);
