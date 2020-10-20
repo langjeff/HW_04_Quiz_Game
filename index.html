@@ -19,16 +19,16 @@
 
 <body>
     <!-- progress bar to serve as visual for countdown timer -->
-    <div class="progress sticky-top" style="height: 20px;">
+    <div class="progress sticky-top" style="height: 10px;">
         <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="-5"
             aria-valuemax="100"></div>
     </div>
     <!-- navbar component for link to high scores -->
-    <nav class="nav nav-pills nav-fill" style="height: 5px;">
+    <nav class="nav nav-pills nav-fill" style="height: 20px;">
         <!-- default navbar for index.html -->
         <a class="nav-item nav-link active" href="#" id="highScores" onclick="viewHighScores()">High Scores</a>
         <!-- alternate nav item when on high scores page -->
-        <a class="nav-item nav-link active" href="#" id="startLink" style="display: none;">Go Back to Quiz</a>        
+        <a class="nav-item nav-link active" href="#" id="quizLink" style="display: none;" onclick="reloadQuiz()">Back to Quiz</a>        
     </nav>
     <!-- Main div for card element to serve as container for questions -->
     <main>
