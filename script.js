@@ -85,7 +85,6 @@ function scoreSort() {
     });
 }
 
-
 //FUNCTION TO VIEW HIGH SCORES
     function viewHighScores() { 
     renderHighScores();
