@@ -5,7 +5,10 @@ Quiz game for demonstrating web API application
 # Deployment
 
 [Github Repository](https://github.com/langjeff/HW_04_Quiz_Game)
+
 [Deployed Application](https://langjeff.github.io/HW_04_Quiz_Game/)
+
+### if cloning repo and deploying locally, a code editor like VScode should be used for viewing and installing the project.
 
 # Requirements & Use-Case
 
