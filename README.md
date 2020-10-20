@@ -5,7 +5,7 @@ Quiz game for demonstrating web API application
 # Deployment
 
 [Github Repository](https://github.com/langjeff/HW_04_Quiz_Game)
-<https://langjeff.github.io/HW_04_Quiz_Game/>
+[Deployed Application](https://langjeff.github.io/HW_04_Quiz_Game/)
 
 # Requirements & Use-Case
 
@@ -37,14 +37,17 @@ The purpose of this application is to build a multiple choice test using javascr
 
 # Files in Repository
 
-\*\* index.html
-Contains .html structure and placeholders for created elements in quiz.
+## index.html
 
-\*\* script.js
+Contains .html structure and placeholders for created dynamically created elements in javascript.
+
+## script.js
+
 Contains javascript for all functions and variables neccessary for project requirements.
 
-\*\* assets folder
+## assets folder
+
 has all image elements for project.
 
-- this project also used bootstrap material design elements for styling.
-  <https://mdbootstrap.github.io/bootstrap-material-design/>
+- this project also used bootstrap material design elements for styling:
+  [MDBootstrap Extension](https://mdbootstrap.github.io/bootstrap-material-design/)
